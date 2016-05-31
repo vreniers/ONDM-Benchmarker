@@ -66,9 +66,6 @@ public class BenchmarkerCRU {
 			dropDatabase(layer);
 			loadDatabase(layer, MAX_INSERTION);
 			
-//			startInsertionTests(layer);
-			startInsertionTests(layer);
-			
 //			startReadTests(layer);
 			startReadTests(layer);
 			
@@ -84,9 +81,11 @@ public class BenchmarkerCRU {
 //			startReadUpdate(layer);
 //			startReadUpdate(layer);
 			
+//			startInsertionTests(layer);
+			startInsertionTests(layer);
 			
 			// Clear space
-//			dropDatabase(layer);
+			dropDatabase(layer);
 		}
 	}
 	
@@ -277,7 +276,7 @@ public class BenchmarkerCRU {
 		// + Enable sharding?
 		// sh.shardCollection("events.alerts", { "_id": "hashed" } )
 		
-		String cmd = "mongo " + layer + " --eval \"db." + collection + ".drop({})\" --host " + host;
+		String cmd = "mongo " + layer + " --eval \"db." + collection + ".drop()\" --host " + host;
 		
 		System.out.println(cmd);
 		System.out.println(SLEEP_CMD + " " + TIMEOUT);

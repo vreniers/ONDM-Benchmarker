@@ -12,9 +12,9 @@ public class Benchmarker {
 	private final static String SLEEP_CMD = "sleep";
 	
 	private final static int MAX_INSERTION = 1000000 * 10;
-	private final static int MAX_OPS = 100;
+	private final static int MAX_OPS = 1000;
 	
-	private final static int INIT_OPS = 100;
+	private final static int INIT_OPS = 1000;
 	private final static int INIT_RECORDS = 50000;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
@@ -53,29 +53,27 @@ public class Benchmarker {
 	 */
 	public Benchmarker() {
 		databaseLayers = new ArrayList<String>();
-//		databaseLayers.add("hibernate");
+		databaseLayers.add("hibernate");
 //		databaseLayers.add("playorm");
-//		databaseLayers.add("eclipselink");
-//		databaseLayers.add("mongodb");
+		databaseLayers.add("eclipselink");
+		databaseLayers.add("mongodb");
 //		databaseLayers.add("gora");
 		databaseLayers.add("kundera");
 		
 		queryCmds = new ArrayList<String>();
-//		queryCmds.add("0");
-//		queryCmds.add("SELECT-PRIMARY");
+		queryCmds.add("0");
+		queryCmds.add("SELECT-PRIMARY");
 		queryCmds.add("EMAIL");
 		queryCmds.add("AND");
 		queryCmds.add("BETWEEN");
-//		queryCmds.add("OR");
+		queryCmds.add("OR");
 //		
 		start();
 	}
 	
 	private void start() {
 		for (String layer: databaseLayers) {
-			dropDatabase(layer);
 			loadDatabase(layer, MAX_INSERTION);
-		}
 			// Transaction phase
 			
 //			startUpdateTests(layer);
@@ -83,18 +81,16 @@ public class Benchmarker {
 			// Clear space
 //			dropDatabase(layer);
 		
-		
-		for (String layer: databaseLayers) {
 			startReadTests(layer);
-//			startReadTests(layer);
-//			startReadTests(layer);
+			startReadTests(layer);
+			startReadTests(layer);
 //			startReadTests(layer);
 			// Transaction phase
 //			startReadUpdate(layer);
 //			startReadModify(layer);
 			
 			// Clear space
-//			dropDatabase(layer);
+			dropDatabase(layer);
 		}
 	}
 	
@@ -296,7 +292,7 @@ public class Benchmarker {
 		// + Enable sharding?
 		// sh.shardCollection("events.alerts", { "_id": "hashed" } )
 		
-		String cmd = "mongo " + layer + " --eval \"db." + collection + ".remove({})\" --host " + host;
+		String cmd = "mongo " + layer + " --eval \"db.dropDatabase()\" --host " + host;
 		
 		System.out.println(cmd);
 		System.out.println(SLEEP_CMD + " " + TIMEOUT);
