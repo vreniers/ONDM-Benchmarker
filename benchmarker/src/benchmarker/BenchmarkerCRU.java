@@ -277,7 +277,7 @@ public class BenchmarkerCRU {
 		// + Enable sharding?
 		// sh.shardCollection("events.alerts", { "_id": "hashed" } )
 		
-		String cmd = "mongo " + layer + " --eval \"db." + collection + ".remove({})\" --host " + host;
+		String cmd = "mongo " + layer + " --eval \"db." + collection + ".drop({})\" --host " + host;
 		
 		System.out.println(cmd);
 		System.out.println(SLEEP_CMD + " " + TIMEOUT);
