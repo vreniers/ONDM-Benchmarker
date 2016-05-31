@@ -69,6 +69,7 @@ public class BenchmarkerCRU {
 			startReadTests(layer);
 			startReadTests(layer);
 			startReadTests(layer);
+			startReadTests(layer);
 			
 			startUpdateTests(layer);
 			startUpdateTests(layer);

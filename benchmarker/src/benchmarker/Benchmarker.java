@@ -84,6 +84,8 @@ public class Benchmarker {
 			startReadTests(layer);
 			startReadTests(layer);
 			startReadTests(layer);
+			startReadTests(layer);
+			
 			
 			String properties="-p readType=OR";
 			
