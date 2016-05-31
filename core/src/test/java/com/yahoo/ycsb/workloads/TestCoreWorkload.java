@@ -1,5 +1,5 @@
 /**                                                                                                                                                                                
- * Copyright (c) 2010 Yahoo! Inc. All rights reserved.                                                                                                                             
+ * Copyright (c) 2016 YCSB contributors. All rights reserved.                                                                                                                             
  *                                                                                                                                                                                 
  * Licensed under the Apache License, Version 2.0 (the "License"); you                                                                                                             
  * may not use this file except in compliance with the License. You                                                                                                                
@@ -14,40 +14,57 @@
  * permissions and limitations under the License. See accompanying                                                                                                                 
  * LICENSE file.                                                                                                                                                                   
  */
+package com.yahoo.ycsb.workloads;
 
-package com.yahoo.ycsb;
+import static org.testng.Assert.assertTrue;
 
 import java.util.Properties;
-import org.apache.htrace.core.Tracer;
 
-/**
- * Creates a DB layer by dynamically classloading the specified DB class.
- */
-public class DBFactory
-{
-      @SuppressWarnings("unchecked")
-	public static DB newDB(String dbname, Properties properties, final Tracer tracer) throws UnknownDBException
-      {
-	 ClassLoader classLoader = DBFactory.class.getClassLoader();
+import org.testng.annotations.Test;
 
-	 DB ret=null;
+import com.yahoo.ycsb.generator.DiscreteGenerator;
 
-	 try 
-	 {
-	    Class dbclass = classLoader.loadClass(dbname);
-	    //System.out.println("dbclass.getName() = " + dbclass.getName());
-	    
-	    ret=(DB)dbclass.newInstance();
-	 }
-	 catch (Exception e) 
-	 {  
-	    e.printStackTrace();
-	    return null;
-	 }
-	 
-	 ret.setProperties(properties);
+public class TestCoreWorkload {
 
-	 return new DBWrapper(ret, tracer);
-      }
-      
+  @Test
+  public void createOperationChooser() {
+    final Properties p = new Properties();
+    p.setProperty(CoreWorkload.READ_PROPORTION_PROPERTY, "0.20");
+    p.setProperty(CoreWorkload.UPDATE_PROPORTION_PROPERTY, "0.20");
+    p.setProperty(CoreWorkload.INSERT_PROPORTION_PROPERTY, "0.20");
+    p.setProperty(CoreWorkload.SCAN_PROPORTION_PROPERTY, "0.20");
+    p.setProperty(CoreWorkload.READMODIFYWRITE_PROPORTION_PROPERTY, "0.20");
+    final DiscreteGenerator generator = CoreWorkload.createOperationGenerator(p);
+    final int[] counts = new int[5];
+    
+    for (int i = 0; i < 100; ++i) {
+      switch (generator.nextString()) {
+      case "READ":
+        ++counts[0];
+        break;
+      case "UPDATE":
+        ++counts[1];
+        break;
+      case "INSERT": 
+        ++counts[2];
+        break;
+      case "SCAN":
+        ++counts[3];
+        break;
+      default:
+        ++counts[4];
+      } 
+    }
+    
+    for (int i : counts) {
+      // Doesn't do a wonderful job of equal distribution, but in a hundred, if we 
+      // don't see at least one of each operation then the generator is really broke.
+      assertTrue(i > 1);
+    }
+  }
+  
+  @Test (expectedExceptions = IllegalArgumentException.class)
+  public void createOperationChooserNullProperties() {
+    CoreWorkload.createOperationGenerator(null);
+  }
 }

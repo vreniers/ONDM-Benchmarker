@@ -17,39 +17,33 @@
 
 package com.yahoo.ycsb.generator;
 
-import com.yahoo.ycsb.Utils;
-
 /**
- * Generates integers randomly uniform from an interval.
+ * A generator that is capable of generating numeric values
+ * 
+ * @author cooperb
+ *
  */
-public class UniformIntegerGenerator extends NumberGenerator 
+public abstract class NumberGenerator extends Generator<Number> 
 {
-	private final int _lb,_ub,_interval;
+	private Number lastVal;
 	
 	/**
-	 * Creates a generator that will return integers uniformly randomly from the interval [lb,ub] inclusive (that is, lb and ub are possible values)
-	 *
-	 * @param lb the lower bound (inclusive) of generated values
-	 * @param ub the upper bound (inclusive) of generated values
+	 * Set the last value generated. NumberGenerator subclasses must use this call
+	 * to properly set the last value, or the {@link #lastValue()} calls won't work.
 	 */
-	public UniformIntegerGenerator(int lb, int ub)
+	protected void setLastValue(Number last)
 	{
-		_lb=lb;
-		_ub=ub;
-		_interval=_ub-_lb+1;
+		lastVal=last;
 	}
+		
 	
 	@Override
-	public Integer nextValue() 
+	public Number lastValue()
 	{
-		int ret=Utils.random().nextInt(_interval)+_lb;
-		setLastValue(ret);
-		
-		return ret;
+		return lastVal;
 	}
-
-	@Override
-	public double mean() {
-		return ((_lb + (long)_ub)) / 2.0;
-	}
+	/**
+	 * Return the expected value (mean) of the values this generator will return.
+	 */
+	public abstract double mean();
 }
