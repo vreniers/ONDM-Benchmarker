@@ -11,7 +11,7 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 1;
+	private final static int MAX_INSERTION = 1000000 * 40;
 	private final static int MAX_OPS = 1000000;
 	
 	private final static int INIT_OPS = 153125;
@@ -22,10 +22,10 @@ public class BenchmarkerCRU {
 	
 	
 	// FIX LARGER TIMEOUT
-	private final static int TIMEOUT = 5;
+	private final static int TIMEOUT = 1200;
 	
 	//
-	private final static int WORKLOAD_TIMEOUT = 5;
+	private final static int WORKLOAD_TIMEOUT = 120;
 	
 	private final static String host = "localhost";
 //	private final static String host = "temse.labo1.cs.kuleuven.be";
@@ -62,27 +62,30 @@ public class BenchmarkerCRU {
 	
 	private void start() {
 		
-		for (String layer: databaseLayers) {			
-			dropDatabase(layer);
+		for (String layer: databaseLayers) {
 			loadDatabase(layer, MAX_INSERTION);
 			
-//			startReadTests(layer);
+			startReadTests(layer);
+			startReadTests(layer);
+			startReadTests(layer);
 			startReadTests(layer);
 			
 			startUpdateTests(layer);
-//			startUpdateTests(layer);
+			startUpdateTests(layer);
+			startUpdateTests(layer);
+			startUpdateTests(layer);
 			
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
 				
 			startReadUpdate(layer);
-//			startReadUpdate(layer);
-//			startReadUpdate(layer);
-//			startReadUpdate(layer);
+			startReadUpdate(layer);
+			startReadUpdate(layer);
+			startReadUpdate(layer);
 			
 //			startInsertionTests(layer);
-			startInsertionTests(layer);
+//			startInsertionTests(layer);
 			
 			// Clear space
 			dropDatabase(layer);
@@ -276,7 +279,7 @@ public class BenchmarkerCRU {
 		// + Enable sharding?
 		// sh.shardCollection("events.alerts", { "_id": "hashed" } )
 		
-		String cmd = "mongo " + layer + " --eval \"db." + collection + ".drop()\" --host " + host;
+		String cmd = "mongo " + layer + " --eval \"db.dropDatabase()\" --host " + host;
 		
 		System.out.println(cmd);
 		System.out.println(SLEEP_CMD + " " + TIMEOUT);

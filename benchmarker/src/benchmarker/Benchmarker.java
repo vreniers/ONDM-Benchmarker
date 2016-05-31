@@ -11,20 +11,20 @@ public class Benchmarker {
 	
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 10;
-	private final static int MAX_OPS = 1000;
+	private final static int MAX_INSERTION = 1000000 * 40;
+	private final static int MAX_OPS = 10000;
 	
-	private final static int INIT_OPS = 1000;
+	private final static int INIT_OPS = 10000;
 	private final static int INIT_RECORDS = 50000;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
 	private final static float OPERATION_INCREMENT = (float) 1.75;
 	
 	// FIX LARGER TIMEOUT 300
-	private final static int TIMEOUT = 5;
+	private final static int TIMEOUT = 1200;
 	
 	// 300
-	private final static int WORKLOAD_TIMEOUT = 5;
+	private final static int WORKLOAD_TIMEOUT = 120;
 	
 	private final static String host = "localhost";
 //	private final static String host = "laarne.labo1.cs.kuleuven.be";
@@ -66,7 +66,7 @@ public class Benchmarker {
 		queryCmds.add("EMAIL");
 		queryCmds.add("AND");
 		queryCmds.add("BETWEEN");
-		queryCmds.add("OR");
+//		queryCmds.add("OR");
 //		
 		start();
 	}
@@ -84,6 +84,13 @@ public class Benchmarker {
 			startReadTests(layer);
 			startReadTests(layer);
 			startReadTests(layer);
+			
+			String properties="-p readType=OR";
+			
+			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 1000, properties);
+			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 1000, properties);
+			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 1000, properties);
+			
 //			startReadTests(layer);
 			// Transaction phase
 //			startReadUpdate(layer);
