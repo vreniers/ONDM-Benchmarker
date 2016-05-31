@@ -1,3 +1,5 @@
+/results/*
+
 /target/
 # Ignore child project's targets as well
 /*/target/

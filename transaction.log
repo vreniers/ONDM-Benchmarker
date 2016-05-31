@@ -1,0 +1,3 @@
+2016-05-31 19:24:39,125 [Thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012163: Starting service com.arjuna.ats.arjuna.recovery.ActionStatusService on port 36231
+2016-05-31 19:24:39,126 [Thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012337: TransactionStatusManagerItem host: 127.0.0.1 port: 36231
+2016-05-31 19:24:39,133 [Thread-3] INFO  com.arjuna.ats.arjuna - ARJUNA012170: TransactionStatusManager started on port 36231 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService

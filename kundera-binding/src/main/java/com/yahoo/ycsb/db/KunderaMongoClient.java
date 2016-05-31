@@ -16,6 +16,7 @@
 package com.yahoo.ycsb.db;
 
 import java.util.HashMap;
+
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -31,6 +32,8 @@ import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.Status;
+
+import com.yahoo.ycsb.db.MongoUser;
 
 /**
  * @author Kuldeep Mishra

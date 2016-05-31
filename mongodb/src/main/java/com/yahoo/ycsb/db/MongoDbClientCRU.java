@@ -68,12 +68,14 @@ public class MongoDbClientCRU extends DB
         Properties props = getProperties();
         
         // default localhost / mechelen.labo1.cs.kuleuven.be
-        String host = props.getProperty("hosts", "temse.labo1.cs.kuleuven.be");
+        String host = props.getProperty("hosts", "localhost");
         String port = props.getProperty("port", "27017");
 //        String url = props.getProperty("mongodb.url",
 //                "mongodb://localhost:27017");
+//        String url = props.getProperty("mongodb.url",
+//                "mongodb://temse.labo1.cs.kuleuven.be:27017");
         String url = props.getProperty("mongodb.url",
-                "mongodb://temse.labo1.cs.kuleuven.be:27017");
+              "mongodb://localhost:27017");
         database = props.getProperty("schema", "mongodb");
         
         String writeConcernType = props.getProperty("mongodb.writeConcern", "acknowledged").toLowerCase();

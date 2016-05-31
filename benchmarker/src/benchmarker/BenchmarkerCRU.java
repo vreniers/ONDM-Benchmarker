@@ -11,7 +11,7 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000;
+	private final static int MAX_INSERTION = 1000000 * 1;
 	private final static int MAX_OPS = 1000000;
 	
 	private final static int INIT_OPS = 153125;
@@ -22,15 +22,15 @@ public class BenchmarkerCRU {
 	
 	
 	// FIX LARGER TIMEOUT
-	private final static int TIMEOUT = 300;
+	private final static int TIMEOUT = 5;
 	
 	//
-	private final static int WORKLOAD_TIMEOUT = 300;
+	private final static int WORKLOAD_TIMEOUT = 5;
 	
-//	private final static String host = "localhost";
-	private final static String host = "temse.labo1.cs.kuleuven.be";
+	private final static String host = "localhost";
+//	private final static String host = "temse.labo1.cs.kuleuven.be";
 	
-	private final static boolean cluster = true;
+	private final static boolean cluster = false;
 	
 	public static void main(String[] args){
 		new BenchmarkerCRU();
@@ -66,20 +66,20 @@ public class BenchmarkerCRU {
 			dropDatabase(layer);
 			loadDatabase(layer, MAX_INSERTION);
 			
-			startInsertionTests(layer);
+//			startInsertionTests(layer);
 			startInsertionTests(layer);
 			
-			startReadTests(layer);
+//			startReadTests(layer);
 			startReadTests(layer);
 			
-//			startUpdateTests(layer);
+			startUpdateTests(layer);
 //			startUpdateTests(layer);
 			
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
 				
-//			startReadUpdate(layer);
+			startReadUpdate(layer);
 //			startReadUpdate(layer);
 //			startReadUpdate(layer);
 //			startReadUpdate(layer);
@@ -215,14 +215,14 @@ public class BenchmarkerCRU {
 		if (!isValid(layer))
 			throw new IllegalArgumentException("Invalid layer specified.");
 		
-		String command = "python ./bin/ycsb " +  loadStr + " " + layer + " -P workloads/" + workload 
-				+ " -threads " + threads + " -p recordcount=" + nrOfRecords + " -p operationcount=" + nrOfOps  + " -target 1000";
+		String command = "python ./bin/ycsb " +  loadStr + " " + layer + "-cru -P workloads/" + workload 
+				+ " -threads " + threads + " -p measurementtype=raw -p recordcount=" + nrOfRecords + " -p operationcount=" + nrOfOps  + " ";
 		String fileName;
 		
 		if (loadPhase)
-			fileName = "results/"  + layer + "/" + layer + "-" + loadStr + "-" + workload + "-" + threads + "-records-" + nrOfRecords;
+			fileName = "results/"  + layer + "-cru/" + layer + "-" + loadStr + "-" + workload + "-" + threads + "-records-" + nrOfRecords;
 		else
-			fileName = "results/"  + layer + "/" + layer + "-" + loadStr + "-" + workload + "-" + threads + "-ops-" + nrOfOps;
+			fileName = "results/"  + layer + "-cru/" + layer + "-" + loadStr + "-" + workload + "-" + threads + "-ops-" + nrOfOps;
 		
 		String outputCmd = command + " > " + fileName + "-rnd-" + Math.abs(rnd.nextInt()) + ".txt";
 		
@@ -242,7 +242,8 @@ public class BenchmarkerCRU {
 	 */
 	private boolean isValid(String layer) {
 		return layer == "kundera" || layer == "eclipselink" || layer == "playorm" 
-				|| layer == "mongodb" || layer == "gora" || layer == "hibernate";
+				|| layer == "mongodb" || layer == "gora" || layer == "hibernate" || layer =="mongodb-cru"
+				|| layer=="kundera-cru" || layer == "eclipselink-cru" || layer == "hibernate-cru" || layer == "gora-cru";
 	}
 
 	/**
