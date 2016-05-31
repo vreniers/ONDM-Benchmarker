@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<!-- for MongoDB, the host and port can accept a comma separated list of values to connect to a cluster of Mongo databases -->
+	<persistence-unit name="eclipselink-mongodb" transaction-type="RESOURCE_LOCAL">
+	        <class>com.yahoo.ycsb.db.Person</class>
+	        <class>com.yahoo.ycsb.db.User</class>
+	        <properties>
+	            <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"/>
+	            <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>
+	            <property name="eclipselink.nosql.property.mongo.port" value="27017"/>
+	            <property name="eclipselink.nosql.property.mongo.host" value="localhost"/>
+<!-- 	            <property name="eclipselink.nosql.property.mongo.host" value="mechelen.labo1.cs.kuleuven.be"/> -->
+	            <property name="eclipselink.nosql.property.mongo.db" value="eclipselink"/>
+	            <property name="eclipselink.logging.level" value="OFF"/>
+	            
+	            <property name="org.eclipse.persistence.config.CacheUsage" value="DoNotCheckCache" />
+	            <property name="eclipselink.cache.shared.default" value="false"/>
+	            <property name="eclipselink.query-results-cache" value="false" />
+	            <property name="eclipselink.cache-usage" value="DoNotCheckCache" />
+	            
+	            <property name="eclipselink.connection-pool.max" value="1" />
+<!-- 	            <property name="eclipselink.nosql.property.mongo.write-concern" value="ACKNOWLEDGED" /> -->
+	        </properties>
+	</persistence-unit>
+</persistence>
+

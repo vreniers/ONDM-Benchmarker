@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!--
+  Gora Mapping file for Cassandra Backend
+-->
+<gora-otd>
+
+  <keyspace name="User" cluster="Test Cluster" host="localhost">
+    <family name="common"/>
+  </keyspace>
+
+  <class name="generated.User" keyClass="java.lang.Long" keyspace="User">
+    <field name="userId" family="common" qualifier="userId"/>
+    <field name="field0" family="common" qualifier="field0"/>
+    <field name="field1" family="common" qualifier="field1"/>
+    <field name="field2" family="common" qualifier="field2"/>
+    <field name="field3" family="common" qualifier="field3"/>
+    <field name="field4" family="common" qualifier="field4"/>
+    <field name="field5" family="common" qualifier="field5"/>
+    <field name="field6" family="common" qualifier="field6"/>
+    <field name="field7" family="common" qualifier="field7"/>
+    <field name="field8" family="common" qualifier="field8"/>
+    <field name="field9" family="common" qualifier="field9"/>
+  </class>
+
+</gora-otd>

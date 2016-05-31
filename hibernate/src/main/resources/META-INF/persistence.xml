@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="hibernate-ogm-mongo" transaction-type="JTA">
+        <!-- Use Hibernate OGM provider: configuration will be transparent -->
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <!-- property optional if you plan and use Infinispan, otherwise adjust to your favorite
+                NoSQL Datastore provider. -->
+            <property name="hibernate.ogm.datastore.provider"  value="mongodb"/>
+            
+<!--              default value 127.0.0.1 -->
+<!--             <property name="hibernate.ogm.datastore.host" value="temse.labo1.cs.kuleuven.be" /> -->
+            <property name="hibernate.ogm.datastore.host" value="127.0.0.1" />
+            
+            <!-- defines which JTA Transaction we plan to use -->
+            <property name="hibernate.transaction.jta.platform"
+                      value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform"/>
+             
+             <property name="hibernate.ogm.datastore.database"  value="hibernate"/>
+             
+             <property name="hibernate.ogm.datastore.create_database" value="true" />
+             
+             <property name="hibernate.ogm.mongodb.write_concern" value="ACKNOWLEDGED" />
+        </properties>
+    </persistence-unit>
+</persistence>
