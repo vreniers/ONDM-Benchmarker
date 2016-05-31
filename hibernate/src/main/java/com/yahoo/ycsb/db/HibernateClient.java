@@ -126,7 +126,7 @@ public class HibernateClient extends DB{
 			query.setParameter("firstname", person.getFirstName());
 			query.setParameter("lastname", person.getLastName());
 			
-			List<Person> people = query.setMaxResults(100000).getResultList();
+			List<Person> people = query.setMaxResults(200000).getResultList();
 			
 			if(!people.contains(person))
 				throw new IllegalArgumentException("Invalid user id: " + key);

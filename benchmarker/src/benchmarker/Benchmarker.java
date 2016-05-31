@@ -11,23 +11,23 @@ public class Benchmarker {
 	
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000;
-	private final static int MAX_OPS = 100000;
+	private final static int MAX_INSERTION = 1000000 * 10;
+	private final static int MAX_OPS = 100;
 	
-	private final static int INIT_OPS = 100000;
+	private final static int INIT_OPS = 100;
 	private final static int INIT_RECORDS = 50000;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
 	private final static float OPERATION_INCREMENT = (float) 1.75;
 	
 	// FIX LARGER TIMEOUT 300
-	private final static int TIMEOUT = 300;
+	private final static int TIMEOUT = 5;
 	
 	// 300
-	private final static int WORKLOAD_TIMEOUT = 300;
+	private final static int WORKLOAD_TIMEOUT = 5;
 	
-//	private final static String host = "localhost";
-	private final static String host = "laarne.labo1.cs.kuleuven.be";
+	private final static String host = "localhost";
+//	private final static String host = "laarne.labo1.cs.kuleuven.be";
 	
 	private final static boolean cluster = false;
 	
@@ -53,10 +53,10 @@ public class Benchmarker {
 	 */
 	public Benchmarker() {
 		databaseLayers = new ArrayList<String>();
-		databaseLayers.add("hibernate");
+//		databaseLayers.add("hibernate");
 //		databaseLayers.add("playorm");
-		databaseLayers.add("eclipselink");
-		databaseLayers.add("mongodb");
+//		databaseLayers.add("eclipselink");
+//		databaseLayers.add("mongodb");
 //		databaseLayers.add("gora");
 		databaseLayers.add("kundera");
 		
@@ -85,7 +85,7 @@ public class Benchmarker {
 		
 		
 		for (String layer: databaseLayers) {
-//			startReadTests(layer);
+			startReadTests(layer);
 //			startReadTests(layer);
 //			startReadTests(layer);
 //			startReadTests(layer);
@@ -232,7 +232,7 @@ public class Benchmarker {
 			throw new IllegalArgumentException("Invalid layer specified.");
 		
 		String command = "python ./bin/ycsb " +  loadStr + " " + layer + " -P workloads/" + workload 
-				+ " -threads " + threads + " -p recordcount=" + nrOfRecords + " -p operationcount=" + nrOfOps + " " +  properties;
+				+ " -threads " + threads + " -p measurementtype=raw -p recordcount=" + nrOfRecords + " -p operationcount=" + nrOfOps + " " +  properties;
 		String fileName;
 		
 		if (loadPhase)

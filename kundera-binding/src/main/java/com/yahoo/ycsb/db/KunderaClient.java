@@ -152,7 +152,7 @@ public class KunderaClient extends DB{
 			query.setParameter("fstname", person.getFirstName());
 			query.setParameter("lstname", person.getLastName());
 			
-			List<Person> people = query.setMaxResults(100000).getResultList();
+			List<Person> people = query.setMaxResults(200000).getResultList();
 			
 			if(!people.contains(person))
 				throw new IllegalArgumentException("Invalid user id: " + key);
