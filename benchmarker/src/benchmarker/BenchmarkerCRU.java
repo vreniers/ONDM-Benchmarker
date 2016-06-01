@@ -69,12 +69,12 @@ public class BenchmarkerCRU {
 			startReadTests(layer);
 			startReadTests(layer);
 			startReadTests(layer);
-			startReadTests(layer);
+//			startReadTests(layer);
 			
 			startUpdateTests(layer);
 			startUpdateTests(layer);
 			startUpdateTests(layer);
-			startUpdateTests(layer);
+//			startUpdateTests(layer);
 			
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
@@ -83,7 +83,7 @@ public class BenchmarkerCRU {
 			startReadUpdate(layer);
 			startReadUpdate(layer);
 			startReadUpdate(layer);
-			startReadUpdate(layer);
+//			startReadUpdate(layer);
 			
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
