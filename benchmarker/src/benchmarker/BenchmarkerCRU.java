@@ -11,7 +11,7 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 40;
+	private final static int MAX_INSERTION = 1000000 * 10;
 	private final static int MAX_OPS = 1000000;
 	
 	private final static int INIT_OPS = 153125;
