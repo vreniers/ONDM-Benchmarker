@@ -11,20 +11,21 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 10;
-	private final static int MAX_OPS = 1000000;
+	// private final static int MAX_INSERTION = 1000000 * 10;
+	private final static int MAX_INSERTION = 10000 * 1;
+	private final static int MAX_OPS = 10000;
 	
-	private final static int INIT_OPS = 153125;
-	private final static int INIT_RECORDS = 153125;
+	private final static int INIT_OPS = 10000;
+	private final static int INIT_RECORDS = 10000;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
 	private final static float OPERATION_INCREMENT = (float) 1.75;
 	
 	
-	// FIX LARGER TIMEOUT
-	private final static int TIMEOUT = 1200;
+	// 1200
+	private final static int TIMEOUT = 1;
 	
-	//
+	// 120
 	private final static int WORKLOAD_TIMEOUT = 120;
 	
 	private final static String host = "localhost";
@@ -67,8 +68,8 @@ public class BenchmarkerCRU {
 			
 			startReadTests(layer);
 			startReadTests(layer);
-			startReadTests(layer);
-			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
 //			startReadTests(layer);
 			
 			startUpdateTests(layer);

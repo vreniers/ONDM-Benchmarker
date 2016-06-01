@@ -1,0 +1,15 @@
+MongoDB shell version: 3.2.5
+connecting to: localhost:27017/mongodb
+{ "dropped" : "mongodb", "ok" : 1 }
+MongoDB shell version: 3.2.5
+connecting to: localhost:27017/hibernate
+{ "dropped" : "hibernate", "ok" : 1 }
+MongoDB shell version: 3.2.5
+connecting to: localhost:27017/eclipselink
+{ "dropped" : "eclipselink", "ok" : 1 }
+MongoDB shell version: 3.2.5
+connecting to: localhost:27017/gora
+{ "ok" : 1 }
+MongoDB shell version: 3.2.5
+connecting to: localhost:27017/kundera
+{ "ok" : 1 }
