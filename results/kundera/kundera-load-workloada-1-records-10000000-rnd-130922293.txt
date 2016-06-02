@@ -1,0 +1,25 @@
+[OVERALL], RunTime(ms), 1896716.0
+[OVERALL], Throughput(ops/sec), 5272.270598234
+[TOTAL_GCS_PS_Scavenge], Count, 5873.0
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 10827.0
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.5708287376707952
+[TOTAL_GCS_PS_MarkSweep], Count, 0.0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0.0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 5873.0
+[TOTAL_GC_TIME], Time(ms), 10827.0
+[TOTAL_GC_TIME_%], Time(%), 0.5708287376707952
+[CLEANUP], Operations, 1.0
+[CLEANUP], AverageLatency(us), 2093.0
+[CLEANUP], MinLatency(us), 2092.0
+[CLEANUP], MaxLatency(us), 2093.0
+[CLEANUP], 95thPercentileLatency(us), 2093.0
+[CLEANUP], 99thPercentileLatency(us), 2093.0
+[INSERT], Operations, 1.0E7
+[INSERT], AverageLatency(us), 188.3775275
+[INSERT], MinLatency(us), 60.0
+[INSERT], MaxLatency(us), 4167679.0
+[INSERT], 95thPercentileLatency(us), 139.0
+[INSERT], 99thPercentileLatency(us), 206.0
+[INSERT], Return=OK, 10000000
+java -Dcom.arjuna.ats.arjuna.common.propertiesFile=default-jbossts-properties.xml -cp /home/vincent/Documents/Benchmarks/YCSB-Extended-v2/datafactory.jar:/home/vincent/Documents/Benchmarks/YCSB-Extended-v2/kundera-binding/target/kundera-binding-0.9.0.jar:/home/vincent/Documents/Benchmarks/YCSB-Extended-v2/kundera-binding/target/archive-tmp/kundera-binding-0.9.0.jar:/home/vincent/Documents/Benchmarks/YCSB-Extended-v2/core/target/core-0.9.0.jar:/home/vincent/Documents/Benchmarks/YCSB-Extended-v2/core/target/archive-tmp/core-0.9.0.jar com.yahoo.ycsb.Client -db com.yahoo.ycsb.db.KunderaClient -P workloads/workloada -threads 1 -p recordcount=10000000 -p operationcount=10000 -load
