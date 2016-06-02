@@ -55,6 +55,7 @@
             <version>2.15</version>
             <scope>test</scope>
         </dependency>
+        
 		<dependency>
 			<groupId>com.impetus.kundera.core</groupId>
 			<artifactId>kundera-core</artifactId>
@@ -65,6 +66,13 @@
 			<artifactId>kundera-mongo</artifactId>
 			<version>2.15</version>
 		</dependency>
+		
+		<dependency>
+		     <groupId>com.impetus.kundera.client</groupId>
+		     <artifactId>kundera-hbase</artifactId>
+		     <version>2.15</version>
+		</dependency>
+				
 		<dependency>
 			<groupId>com.yahoo.ycsb</groupId>
 			<artifactId>core</artifactId>
