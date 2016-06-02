@@ -9,7 +9,7 @@ connecting to: localhost:27017/eclipselink
 { "dropped" : "eclipselink", "ok" : 1 }
 MongoDB shell version: 3.2.5
 connecting to: localhost:27017/gora
-{ "ok" : 1 }
+{ "dropped" : "gora", "ok" : 1 }
 MongoDB shell version: 3.2.5
 connecting to: localhost:27017/kundera
-{ "ok" : 1 }
+{ "dropped" : "kundera", "ok" : 1 }

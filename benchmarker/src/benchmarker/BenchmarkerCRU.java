@@ -11,25 +11,26 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	// private final static int MAX_INSERTION = 1000000 * 10;
-	private final static int MAX_INSERTION = 10000 * 1;
-	private final static int MAX_OPS = 10000;
+	private final static int MAX_INSERTION = 1000000 * 40;
+	//private final static int MAX_INSERTION = 10000 * 1;
+	private final static int MAX_OPS = 100000 * 10;
 	
-	private final static int INIT_OPS = 10000;
-	private final static int INIT_RECORDS = 10000;
+	private final static int INIT_OPS = 153125;
+	private final static int INIT_RECORDS = 153125;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
 	private final static float OPERATION_INCREMENT = (float) 1.75;
 	
 	
-	// 1200
-	private final static int TIMEOUT = 1;
+//	// 1200
+	private final static int TIMEOUT = 1500;
 	
 	// 120
 	private final static int WORKLOAD_TIMEOUT = 120;
 	
-	private final static String host = "localhost";
-//	private final static String host = "temse.labo1.cs.kuleuven.be";
+	
+//	private final static String host = "localhost";
+	private final static String host = "riemst.labo1.cs.kuleuven.be";
 	
 	private final static boolean cluster = false;
 	
@@ -68,8 +69,8 @@ public class BenchmarkerCRU {
 			
 			startReadTests(layer);
 			startReadTests(layer);
-//			startReadTests(layer);
-//			startReadTests(layer);
+			startReadTests(layer);
+			startReadTests(layer);
 //			startReadTests(layer);
 			
 			startUpdateTests(layer);
@@ -281,7 +282,7 @@ public class BenchmarkerCRU {
 		// + Enable sharding?
 		// sh.shardCollection("events.alerts", { "_id": "hashed" } )
 		
-		String cmd = "mongo " + layer + " --eval \"db.dropDatabase()\" --host " + host;
+		String cmd = "../MongoDB/bin/mongo " + layer + " --eval \"db.dropDatabase()\" --host " + host;
 		
 		System.out.println(cmd);
 		System.out.println(SLEEP_CMD + " " + TIMEOUT);
@@ -291,7 +292,7 @@ public class BenchmarkerCRU {
 //		cmd = "mongo " + layer + " --eval \"sh.enableSharding('" + layer + "')\" --host " + host;
 //		System.out.println(cmd);
 		
-		cmd = "mongo " + layer + " --eval \"sh.shardCollection('" + layer + "." + collection + "', { '_id': 1})\" --host " + host;
+		cmd = "../MongoDB/bin/mongo " + layer + " --eval \"sh.shardCollection('" + layer + "." + collection + "', { '_id': 1})\" --host " + host;
 		if(cluster)
 			System.out.println(cmd);
 		
