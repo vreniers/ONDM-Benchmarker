@@ -35,6 +35,7 @@ DATABASES = {
     "kundera-cru"      : "com.yahoo.ycsb.db.KunderaClientCRU", 
     "eclipselink-cru"  : "com.yahoo.ycsb.db.EclipseLinkClientCRU", 
     "gora-cru"   : "com.yahoo.ycsb.db.GoraClientCRU", 
+    "hbase" : "com.yahoo.ycsb.db.HBaseClient",
 }
 
 OPTIONS = {

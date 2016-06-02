@@ -39,6 +39,16 @@ public class GoraClientCRU extends DB{
 	
 	private final int clearOps = 1000;	
 	
+	public static void main(String[] args) {
+		GoraClientCRU client = new GoraClientCRU();
+		try {
+			client.init();
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Initializes once.
 	 */

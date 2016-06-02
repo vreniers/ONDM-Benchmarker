@@ -29,7 +29,7 @@ public class KunderaClientCRU extends DB{
 
     private static final Status Error = Status.ERROR;
     
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("kundera-mongodb");
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("kundera-hbase");
     
     //TODO: !!!!!!!!!!!!!!!! Fixed
     private final int clearOps = 1000;

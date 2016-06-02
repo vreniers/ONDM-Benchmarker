@@ -20,27 +20,23 @@
   Gora Mapping file for HBase Backend
 -->
 <gora-otd>
-  <table name="Pageview"> <!-- optional descriptors for tables -->
-    <family name="common"/> <!-- This can also have params like compression, bloom filters -->
-    <family name="http"/>
-    <family name="misc"/>
+
+  <table name="users">
+  	<family name="info" />
   </table>
-
-  <class name="org.apache.gora.tutorial.log.generated.Pageview" keyClass="java.lang.Long" table="AccessLog">
-    <field name="url" family="common" qualifier="url"/>
-    <field name="timestamp" family="common" qualifier="timestamp"/>
-    <field name="ip" family="common" qualifier="ip" />
-    <field name="httpMethod" family="http" qualifier="httpMethod"/>
-    <field name="httpStatusCode" family="http" qualifier="httpStatusCode"/>
-    <field name="responseSize" family="http" qualifier="responseSize"/>
-    <field name="referrer" family="misc" qualifier="referrer"/>
-    <field name="userAgent" family="misc" qualifier="userAgent"/>
-  </class>
-
-  <class name="org.apache.gora.tutorial.log.generated.MetricDatum" keyClass="java.lang.String" table="Metrics">
-    <field name="metricDimension" family="common"  qualifier="metricDimension"/>
-    <field name="timestamp" family="common" qualifier="ts"/>
-    <field name="metric" family="common" qualifier="metric"/>
-  </class>
+  <class name="generated.User" keyClass="java.lang.String" table="users">
+    	
+        <field name="userId" family="info" />
+        <field name="field0" family="info" />
+        <field name="field1" family="info" />
+        <field name="field2" family="info"  />
+        <field name="field3" family="info" />
+        <field name="field4" family="info" />
+        <field name="field5" family="info" />
+        <field name="field6" family="info" />
+        <field name="field7" family="info" />
+        <field name="field8" family="info" />
+        <field name="field9" family="info" />
+    </class>
 
 </gora-otd>

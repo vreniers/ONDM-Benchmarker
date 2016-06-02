@@ -41,7 +41,12 @@
 	      <artifactId>mongo-java-driver</artifactId>
 	      <version>${mongodb.version}</version>
 	    </dependency>
-	    
+	 
+	 <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-client</artifactId>
+      <version>${hbase098.version}</version>
+    </dependency>
 	    <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-nop</artifactId>

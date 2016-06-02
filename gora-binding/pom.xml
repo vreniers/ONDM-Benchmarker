@@ -37,6 +37,12 @@
 <!-- 		</dependency> -->
 		
 		<dependency>
+	      <groupId>org.apache.hbase</groupId>
+	      <artifactId>hbase-client</artifactId>
+	      <version>${hbase098.version}</version>
+	    </dependency>
+    
+		<dependency>
 			<groupId>org.apache.gora</groupId>
 			<artifactId>gora-core</artifactId>
 			<version>0.6</version>

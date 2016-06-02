@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user", schema = "kundera@kundera-mongodb")
+@Table(name = "user", schema = "kundera@kundera-hbase")
 public class User 
 {
     @Override
