@@ -11,6 +11,7 @@ package com.yahoo.ycsb.db;
  */
 
 import java.net.UnknownHostException;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Properties;
@@ -194,10 +195,17 @@ public class MongoDbClientCRU extends DB
             DBCollection collection = db.getCollection(table);
             DBObject r = new BasicDBObject();
             r.put("_id", key);
-            for (String k : values.keySet())
-            {
-                r.put(k, getString(key, "kk"));
-            }
+            
+            r.put("field0", values.get("field0").toString());
+            r.put("field1", values.get("field1").toString());
+            r.put("field2", values.get("field2").toString());
+            r.put("field3", values.get("field3").toString());
+			r.put("field4", values.get("field4").toString()); 
+            r.put("field5", values.get("field5").toString());
+            r.put("field6", values.get("field6").toString());
+            r.put("field7", values.get("field7").toString());
+            r.put("field8", values.get("field8").toString());
+            r.put("field9",	values.get("field9").toString());
             
             collection.insert(r);
             
@@ -291,9 +299,10 @@ public class MongoDbClientCRU extends DB
             while (keys.hasNext())
             {
                 String tmpKey = keys.next();
-                fieldsToSet.put(tmpKey, values.get(tmpKey).toArray());
+                fieldsToSet.put(tmpKey, values.get(tmpKey).toString());
             }
             u.put("$set", fieldsToSet);
+            
             WriteResult res = collection.update(q, u, false, false, writeConcern);
             return res.getN() == 1 ? Status.OK : Status.ERROR;
         }

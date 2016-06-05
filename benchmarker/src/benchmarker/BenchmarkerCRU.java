@@ -11,11 +11,11 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 40;
+	private final static int MAX_INSERTION = 1000000 * 10;
 	//private final static int MAX_INSERTION = 10000 * 1;
 	private final static int MAX_OPS = 100000 * 10;
 	
-	private final static int INIT_OPS = 153125;
+	private final static int INIT_OPS = 153125 * 10;
 	private final static int INIT_RECORDS = 153125;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
@@ -68,14 +68,14 @@ public class BenchmarkerCRU {
 			loadDatabase(layer, MAX_INSERTION);
 			
 			startReadTests(layer);
-			startReadTests(layer);
-			startReadTests(layer);
-			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
 //			startReadTests(layer);
 			
 			startUpdateTests(layer);
-			startUpdateTests(layer);
-			startUpdateTests(layer);
+//			startUpdateTests(layer);
+//			startUpdateTests(layer);
 //			startUpdateTests(layer);
 			
 //			startInsertionTests(layer);
@@ -83,8 +83,8 @@ public class BenchmarkerCRU {
 //			startInsertionTests(layer);
 				
 			startReadUpdate(layer);
-			startReadUpdate(layer);
-			startReadUpdate(layer);
+//			startReadUpdate(layer);
+//			startReadUpdate(layer);
 //			startReadUpdate(layer);
 			
 //			startInsertionTests(layer);
@@ -213,15 +213,18 @@ public class BenchmarkerCRU {
 		Random rnd = new Random();
 		
 		String loadStr = "run";
+		String measurementType = "raw";
 		
-		if (loadPhase)
+		if (loadPhase) {
 			loadStr = "load";
+			measurementType = "timeseries";
+		}
 		
 		if (!isValid(layer))
 			throw new IllegalArgumentException("Invalid layer specified.");
 		
 		String command = "python ./bin/ycsb " +  loadStr + " " + layer + "-cru -P workloads/" + workload 
-				+ " -threads " + threads + " -p measurementtype=raw -p recordcount=" + nrOfRecords + " -p operationcount=" + nrOfOps  + " ";
+				+ " -threads " + threads + " -p measurementtype=" + measurementType +  " -p recordcount=" + nrOfRecords + " -p operationcount=" + nrOfOps  + " ";
 		String fileName;
 		
 		if (loadPhase)
