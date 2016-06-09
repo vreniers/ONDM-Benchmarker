@@ -1,9 +1,6 @@
 package com.yahoo.ycsb.db;
 
 
-import generated.User;
-
-
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Vector;
@@ -14,11 +11,14 @@ import org.apache.gora.store.DataStore;
 import org.apache.gora.store.DataStoreFactory;
 import org.apache.gora.util.GoraException;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
 
 import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.Status;
+
+import generated.User;
 
 /**
  * Database interface layer for YCSB.

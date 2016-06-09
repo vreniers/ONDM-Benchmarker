@@ -32,7 +32,7 @@
 			<property name="kundera.client.lookup.class" value="com.impetus.client.hbase.HBaseClientFactory" />
 
 			<!-- <property name="index.home.dir" value="./lucene" /> -->
-			<property name="kundera.ddl.auto.prepare" value="create" />
+			<property name="kundera.ddl.auto.prepare" value="update" />
 			<property name="kundera.pool.size.max.active" value="1" />
 			<property name="kundera.pool.size.max.total" value="1" />
 			<property name="kundera.client.property" value="kunderaTest.xml" />
