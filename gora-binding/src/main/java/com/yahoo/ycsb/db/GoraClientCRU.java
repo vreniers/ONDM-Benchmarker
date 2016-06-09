@@ -54,7 +54,11 @@ public class GoraClientCRU extends DB{
 	 */
 	public void init() throws DBException {
 	    try {
-			dataStore = DataStoreFactory.getDataStore(String.class, User.class, new Configuration());
+	    	Configuration hConf = HBaseConfiguration.create(new Configuration());
+	    	hConf.set("hbase.zookeeper.quorum", "192.168.1.6");
+	    	hConf.set("hbase.zookeeper.property.clientPort", "2181");
+	    	
+			dataStore = DataStoreFactory.getDataStore(String.class, User.class, hConf );
 			
 			amountOps = 1;
 		} catch (GoraException e) {
