@@ -11,7 +11,7 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 10;
+	private final static int MAX_INSERTION = 1000000 * 20;
 	//private final static int MAX_INSERTION = 10000 * 1;
 	private final static int MAX_OPS = 100000 * 10;
 	
@@ -30,7 +30,7 @@ public class BenchmarkerCRU {
 	
 	
 //	private final static String host = "localhost";
-	private final static String host = "riemst.labo1.cs.kuleuven.be";
+	private final static String host = "mechelen.labo1.cs.kuleuven.be";
 	
 	private final static boolean cluster = false;
 	
