@@ -1,7 +1,5 @@
 package com.yahoo.ycsb.db;
 
-import org.datanucleus.enhancer.DataNucleusEnhancer;
-
 
 import java.util.HashMap;
 
@@ -24,6 +22,8 @@ import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.Status;
+
+import org.datanucleus.enhancer.DataNucleusEnhancer;
 
 /**
  * Database interface layer for the Kundera abstraction layer.
@@ -50,15 +50,10 @@ public class DataNucleusClientCRU extends DB{
 	 */
 	public void init() throws DBException {
 		Map properties = new HashMap();
-		
-		DataNucleusEnhancer enhancer = new DataNucleusEnhancer("JPA", null);
-		enhancer.setVerbose(true);
-		enhancer.addPersistenceUnit("datanucleus-mongodb");
-		enhancer.enhance();
-		
+
 		properties.put("eclipselink.nosql.property.mongo.write-concern", WriteConcern.ACKNOWLEDGED);
 		
-		emf = Persistence.createEntityManagerFactory("datanucleus-mongodb" , properties);
+		emf = Persistence.createEntityManagerFactory("MongoDB" , properties);
         amountOps = 1;
 	}
 	

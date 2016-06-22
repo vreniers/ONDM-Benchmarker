@@ -86,7 +86,7 @@
     <module>kundera-binding</module>
     <!--<module>gemfire</module>-->
     <module>mongodb</module>
-    <module>datanucleus-binding</module>
+    <module>datanucleus</module>
     <!--module>nosqldb</module-->
     <module>hbase098</module>
     <module>distribution</module>

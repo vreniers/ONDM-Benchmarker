@@ -36,6 +36,8 @@ DATABASES = {
     "eclipselink-cru"  : "com.yahoo.ycsb.db.EclipseLinkClientCRU", 
     "gora-cru"   : "com.yahoo.ycsb.db.GoraClientCRU", 
     "hbase" : "com.yahoo.ycsb.db.HBaseClient",
+    "datanucleus" : "com.yahoo.ycsb.db.DataNucleusClient",
+    "datanucleus-cru" : "com.yahoo.ycsb.db.DataNucleusClientCRU",
 }
 
 OPTIONS = {
