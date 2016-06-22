@@ -15,7 +15,7 @@ public class BenchmarkerCRU {
 	//private final static int MAX_INSERTION = 10000 * 1;
 	private final static int MAX_OPS = 100000 * 10;
 	
-	private final static int INIT_OPS = 153125;
+	private final static int INIT_OPS = 1000000;
 	private final static int INIT_RECORDS = 153125;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
@@ -51,12 +51,12 @@ public class BenchmarkerCRU {
 	public BenchmarkerCRU() {
 		databaseLayers = new ArrayList<String>();
 		databaseLayers.add("mongodb");
-		databaseLayers.add("hibernate");
+//		databaseLayers.add("hibernate");
 //		databaseLayers.add("playorm");
-		databaseLayers.add("eclipselink");
+//		databaseLayers.add("eclipselink");
 		
-		databaseLayers.add("gora");
-		databaseLayers.add("kundera");
+//		databaseLayers.add("gora");
+//		databaseLayers.add("kundera");
 		
 //		
 		start();
@@ -68,14 +68,14 @@ public class BenchmarkerCRU {
 			loadDatabase(layer, MAX_INSERTION);
 			
 			startReadTests(layer);
-			startReadTests(layer);
-			startReadTests(layer);
-			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
 //			startReadTests(layer);
 			
-			startUpdateTests(layer);
-			startUpdateTests(layer);
-			startUpdateTests(layer);
+//			startUpdateTests(layer);
+//			startUpdateTests(layer);
+//			startUpdateTests(layer);
 //			startUpdateTests(layer);
 			
 //			startInsertionTests(layer);
@@ -83,8 +83,8 @@ public class BenchmarkerCRU {
 //			startInsertionTests(layer);
 				
 			startReadUpdate(layer);
-			startReadUpdate(layer);
-			startReadUpdate(layer);
+//			startReadUpdate(layer);
+//			startReadUpdate(layer);
 //			startReadUpdate(layer);
 			
 //			startInsertionTests(layer);
