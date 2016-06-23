@@ -51,13 +51,24 @@
             <artifactId>mongo-java-driver</artifactId>
             <version>${mongodb.version}</version>
         </dependency>
-
+        
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-mongodb</artifactId>
             <version>[5.0.0-m1, 5.9)</version>
         </dependency>
-
+		
+		  <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.6.1</version>
+		  </dependency>
+		  <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.6.1</version>
+		  </dependency>
+		
     </dependencies>
 
     <build>
@@ -69,8 +80,8 @@
                 <configuration>
                     <api>JPA</api>
                     <persistenceUnitName>MongoDB</persistenceUnitName>
-                    <log4jConfiguration>${basedir}/log4j.properties</log4jConfiguration>
-                    <verbose>true</verbose>
+                    <log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
+                    <verbose>false</verbose>
                 </configuration>
                 <executions>
                     <execution>

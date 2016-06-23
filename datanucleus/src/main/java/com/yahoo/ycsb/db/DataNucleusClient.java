@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.FlushModeType;
@@ -22,7 +21,7 @@ import com.yahoo.ycsb.Status;
 
 
 /**
- * Database interface layer for the Kundera abstraction layer.
+ * Database interface layer for DataNucleus
  * This abstraction layer will communicate with a selected NoSQL datastore.
  *
  * @author vincent
@@ -49,6 +48,12 @@ public class DataNucleusClient extends DB{
 	public void init() throws DBException {
 		Map properties = new HashMap();
 
+//        DataNucleusEnhancer enhancer = new DataNucleusEnhancer("JPA", null);
+//        enhancer.setVerbose(true);
+//        enhancer.addPersistenceUnit("MongoDB");
+//        enhancer.enhance();
+		
+		
 		emf = Persistence.createEntityManagerFactory("MongoDB" , properties);
 		amountOps = 1;
 	}
@@ -110,18 +115,18 @@ public class DataNucleusClient extends DB{
 			@SuppressWarnings("unused")
 			Person p = em.find(Person.class, key);
 
-			System.out.println(p);
+//			System.out.println(p);
 		} else if(readType.equals("SELECT-PRIMARY")){
 			Query query = em.createQuery("Select p from Person p WHERE p.userId = '" + key + "'");
 			List<Person> people = query.getResultList();
 
-			System.out.println(people.size());
-			System.out.println(people);
-
-			System.out.println("------");
-			for(Person p: people) {
-				System.out.println(p);
-			}
+//			System.out.println(people.size());
+//			System.out.println(people);
+//
+//			System.out.println("------");
+//			for(Person p: people) {
+//				System.out.println(p);
+//			}
 			if(!people.contains(person))
 				throw new IllegalArgumentException("Invalid user id.");
 		} else if(readType.equals("EMAIL")){
@@ -129,7 +134,7 @@ public class DataNucleusClient extends DB{
 			query.setParameter("email", person.getEmail());
 
 			List<Person> people = query.getResultList();
-
+			
 			if(!people.contains(person))
 				throw new IllegalArgumentException("Invalid user id.");
 		} else if(readType.equals("OR")){
@@ -141,7 +146,7 @@ public class DataNucleusClient extends DB{
 
 
 			List<Person> people = query.setMaxResults(200000).getResultList();
-			System.out.println(people.size());
+//			System.out.println(people.size());
 
 			if(!people.contains(person))
 				throw new IllegalArgumentException("Invalid user id: " + key);
@@ -151,7 +156,7 @@ public class DataNucleusClient extends DB{
 			query.setParameter("personalnumber", person.getPersonalnumber());
 
 			List<Person> people = query.getResultList();
-			System.out.println(people.size());
+//			System.out.println(people.size());
 			if(!people.contains(person))
 				throw new IllegalArgumentException("Invalid user id.");
 		} else if(readType.equals("BETWEEN")){

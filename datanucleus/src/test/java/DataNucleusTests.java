@@ -11,7 +11,7 @@ import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import org.datanucleus.enhancer.DataNucleusEnhancer;
+//import org.datanucleus.enhancer.DataNucleusEnhancer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,10 +32,10 @@ public class DataNucleusTests {
     public static void init() throws DBException {
         Map properties = new HashMap();
 
-        DataNucleusEnhancer enhancer = new DataNucleusEnhancer("JPA", null);
-        enhancer.setVerbose(true);
-        enhancer.addPersistenceUnit("MongoDB");
-        enhancer.enhance();
+//        DataNucleusEnhancer enhancer = new DataNucleusEnhancer("JPA", null);
+//        enhancer.setVerbose(true);
+//        enhancer.addPersistenceUnit("MongoDB");
+//        enhancer.enhance();
 
         emf = Persistence.createEntityManagerFactory("MongoDB" , properties);
 
@@ -294,7 +294,7 @@ public class DataNucleusTests {
         try {
             EntityManager em = getEntityManager();
 
-            Query query = em.createQuery("Select u from User u WHERE u.userId = 6");
+            Query query = em.createQuery("Select u from User u WHERE u.userId = '6'");
             List<User> users = query.getResultList();
 
             assertTrue(users.size() == 1);
@@ -312,7 +312,7 @@ public class DataNucleusTests {
         try {
             EntityManager em = getEntityManager();
 
-            Query query = em.createQuery("Select u from User u WHERE u.userId >= 3");
+            Query query = em.createQuery("Select u from User u WHERE u.userId >= '3'");
             List<User> users = query.getResultList();
 
             assertTrue(users.size() > 0);
@@ -364,7 +364,7 @@ public class DataNucleusTests {
         try {
             EntityManager em = getEntityManager();
 
-            Query query = em.createQuery("Select u from User u WHERE (u.field0 = 'TestU' OR u.field1 = 'TESTFIELD') AND u.userId = 6");
+            Query query = em.createQuery("Select u from User u WHERE (u.field0 = 'TestU' OR u.field1 = 'TESTFIELD') AND u.userId = '6'");
             List<User> users = query.getResultList();
 
             assertTrue(users.get(0).getUserId().equals("6"));

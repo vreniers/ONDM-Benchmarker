@@ -23,7 +23,6 @@ import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.Status;
 
-import org.datanucleus.enhancer.DataNucleusEnhancer;
 
 /**
  * Database interface layer for the Kundera abstraction layer.
@@ -50,9 +49,13 @@ public class DataNucleusClientCRU extends DB{
 	 */
 	public void init() throws DBException {
 		Map properties = new HashMap();
-
-		properties.put("eclipselink.nosql.property.mongo.write-concern", WriteConcern.ACKNOWLEDGED);
 		
+//		DataNucleusEnhancer enhancer = new DataNucleusEnhancer("JPA", null);
+//        enhancer.setVerbose(true);
+//        enhancer.addPersistenceUnit("MongoDB");
+//        enhancer.enhance();
+
+        
 		emf = Persistence.createEntityManagerFactory("MongoDB" , properties);
         amountOps = 1;
 	}
@@ -73,6 +76,8 @@ public class DataNucleusClientCRU extends DB{
 			EntityManager em = getEntityManager();
 			
 			User u = em.find(User.class, key);
+			
+//			System.out.println(u);
 			
 			if(amountOps++ % clearOps == 0)
 				em.clear();

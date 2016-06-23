@@ -13,8 +13,22 @@
             <property name="datanucleus.IgnoreCache" value="true" />
             <property name="datanucleus.ConnectionURL" value="mongodb:/datanucleus" />
             <!-- 	            <property name="eclipselink.nosql.property.mongo.write-concern" value="ACKNOWLEDGED" /> -->
-            <property name="datanucleus.cache.queryCompilation.type" value="none" />
-            <property name="datanucleus.query.results.cached" value="false" />
+<!--             <property name="datanucleus.cache.queryCompilation.type" value="none" /> -->
+<!--             <property name="datanucleus.query.results.cached" value="false" /> -->
+			<property name="datanucleus.schema.autoCreateAll" value="true" />
+			<property name="datanucleus.persistenceByReachabilityAtCommit" value="false" />
+			<property name="datanucleus.manageRelationships" value="false" />
+			<property name="datanucleus.cache.level2.type" value="none" />
+			<property name="datanucleus.findObject.validateWhenCached" value="false" />
+			
+			<property name="datanucleus.cache.collections" value="false" />
+			<property name="datanucleus.cache.collections.lazy" value="false" />
+			<property name="datanucleus.query.compileOptimised" value="false" />
+			<property name="datanucleus.query.compilation.cached" value="false" />
+			<property name="datanucleus.query.results.cached" value="false" />
+			<property name="datanucleus.query.resultCache.validateObjects" value="false" />
+			<property name="datanucleus.cache.queryCompilation.type" value="none" />
+			<property name="datanucleus.cache.queryCompilationDatastore.type" value="none" />
         </properties>
     </persistence-unit>
 
