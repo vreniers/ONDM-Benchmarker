@@ -11,7 +11,7 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 40;
+	private final static int MAX_INSERTION = 100000 * 40;
 	//private final static int MAX_INSERTION = 10000 * 1;
 	private final static int MAX_OPS = 100000 * 10;
 	
@@ -50,13 +50,15 @@ public class BenchmarkerCRU {
 	 */
 	public BenchmarkerCRU() {
 		databaseLayers = new ArrayList<String>();
-		databaseLayers.add("mongodb");
+//		databaseLayers.add("mongodb");
 //		databaseLayers.add("hibernate");
 //		databaseLayers.add("playorm");
 //		databaseLayers.add("eclipselink");
 		
 //		databaseLayers.add("gora");
 //		databaseLayers.add("kundera");
+		
+		databaseLayers.add("datanucleus");
 		
 //		
 		start();
@@ -73,7 +75,7 @@ public class BenchmarkerCRU {
 //			startReadTests(layer);
 //			startReadTests(layer);
 			
-//			startUpdateTests(layer);
+			startUpdateTests(layer);
 //			startUpdateTests(layer);
 //			startUpdateTests(layer);
 //			startUpdateTests(layer);
@@ -82,7 +84,7 @@ public class BenchmarkerCRU {
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
 				
-			startReadUpdate(layer);
+//			startReadUpdate(layer);
 //			startReadUpdate(layer);
 //			startReadUpdate(layer);
 //			startReadUpdate(layer);
@@ -91,7 +93,7 @@ public class BenchmarkerCRU {
 //			startInsertionTests(layer);
 			
 			// Clear space
-			dropDatabase(layer);
+//			dropDatabase(layer);
 		}
 	}
 	
@@ -248,7 +250,8 @@ public class BenchmarkerCRU {
 	private boolean isValid(String layer) {
 		return layer == "kundera" || layer == "eclipselink" || layer == "playorm" 
 				|| layer == "mongodb" || layer == "gora" || layer == "hibernate" || layer =="mongodb-cru"
-				|| layer=="kundera-cru" || layer == "eclipselink-cru" || layer == "hibernate-cru" || layer == "gora-cru";
+				|| layer=="kundera-cru" || layer == "eclipselink-cru" || layer == "hibernate-cru" || layer == "gora-cru" 
+				|| layer == "datanucleus" || layer == "datanucleus-cru";
 	}
 
 	/**
