@@ -1,9 +1,13 @@
 package com.yahoo.ycsb.db;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+
+import org.datanucleus.api.jpa.annotations.DatastoreId;
 
 @Entity
 public class User 
@@ -17,7 +21,8 @@ public class User
 				+ ", field9=" + field9 + "]";
 	}
 
-	@Id
+    @Id
+    @Column(name="_id")
     private String userId;
 
     private String field0, field1, field2, field3,field4, field5, field6, field7, field8, field9;

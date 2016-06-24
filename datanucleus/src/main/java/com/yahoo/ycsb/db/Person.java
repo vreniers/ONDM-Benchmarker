@@ -1,6 +1,7 @@
 package com.yahoo.ycsb.db;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 public class Person 
 {
 	@Id
+	@Column(name="_id")
     private String userId;
 	
     private String firstName;

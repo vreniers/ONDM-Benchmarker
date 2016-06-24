@@ -12,10 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 
-
-
-
-
+//import org.datanucleus.enhancer.DataNucleusEnhancer;
 
 import com.mongodb.WriteConcern;
 import com.yahoo.ycsb.ByteIterator;
