@@ -14,7 +14,6 @@ import javax.persistence.Persistence;
 
 //import org.datanucleus.enhancer.DataNucleusEnhancer;
 
-import com.mongodb.WriteConcern;
 import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;

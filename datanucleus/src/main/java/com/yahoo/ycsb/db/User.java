@@ -2,12 +2,7 @@ package com.yahoo.ycsb.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-
-import org.datanucleus.api.jpa.annotations.DatastoreId;
 
 @Entity
 public class User 
