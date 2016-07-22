@@ -12,9 +12,9 @@ public class Benchmarker {
 	private final static String SLEEP_CMD = "sleep";
 	
 	private final static int MAX_INSERTION = 100000 * 10;
-	private final static int MAX_OPS = 100000;
+	private final static int MAX_OPS = 200000;
 	
-	private final static int INIT_OPS = 100000;
+	private final static int INIT_OPS = 200000;
 	private final static int INIT_RECORDS = 50000;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
@@ -82,11 +82,8 @@ public class Benchmarker {
 			
 			// Clear space
 //			dropDatabase(layer);
-		
-			startReadTests(layer);
-//			startReadTests(layer);
-//			startReadTests(layer);
-//			startReadTests(layer);
+			
+			timeout();
 			
 			String properties="-p readType=0";
 			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 100000 * 10, properties);
@@ -94,12 +91,15 @@ public class Benchmarker {
 			properties="-p readType=SELECT-PRIMARY";
 			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 100000 * 10, properties);
 			
+			
+			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
+			
+			
 			properties="-p readType=OR";
-			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 10000, properties);
-			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 10000, properties);
-			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 10000, properties);
-			
-			
+			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 30000, properties);
 			
 //			startReadTests(layer);
 			// Transaction phase

@@ -20,7 +20,7 @@
 		<artifactId>datafactory</artifactId>
 		<version>0.9-SNAPSHOT</version>
          <scope>system</scope>
-         <systemPath>/home/vincent/Documents/Benchmarks/YCSB-Extended-v2/datafactory.jar</systemPath>
+         <systemPath>/Users/vincent/NoSQL middleware/YCSB-Extended-V2/datafactory.jar</systemPath>
     </dependency>
 	
     <!-- voldemort -->

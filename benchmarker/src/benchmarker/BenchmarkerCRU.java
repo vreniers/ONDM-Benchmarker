@@ -11,7 +11,7 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 100000 * 40;
+	private final static int MAX_INSERTION = 100000 * 200;
 	//private final static int MAX_INSERTION = 10000 * 1;
 	private final static int MAX_OPS = 100000 * 10;
 	
@@ -50,7 +50,7 @@ public class BenchmarkerCRU {
 	 */
 	public BenchmarkerCRU() {
 		databaseLayers = new ArrayList<String>();
-//		databaseLayers.add("mongodb");
+		databaseLayers.add("mongodb");
 //		databaseLayers.add("hibernate");
 //		databaseLayers.add("playorm");
 //		databaseLayers.add("eclipselink");
@@ -93,7 +93,7 @@ public class BenchmarkerCRU {
 //			startInsertionTests(layer);
 			
 			// Clear space
-//			dropDatabase(layer);
+			dropDatabase(layer);
 		}
 	}
 	

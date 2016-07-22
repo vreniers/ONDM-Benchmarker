@@ -194,6 +194,7 @@ public class DataNucleusTests {
 
         readUser = em.find(User.class, "3");
         assertEquals(readUser.getField0(), "NEWTEST");
+        System.out.println(readUser);
 
         em.clear();
         em.close();
