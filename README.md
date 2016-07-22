@@ -1,6 +1,6 @@
-Yahoo! Cloud System Benchmark (YCSB) Extended
+Object-NoSQL Database Mapper (ONDM) benchmark
 ======================================================
-Extended by Vincent Reniers with support for NoSQL abstraction layers:
+This benchmark uses YCSB, and is extended by Vincent Reniers with support for NoSQL abstraction layers:
 - EclipseLink
 - PlayORM
 - Hibernate OGM
