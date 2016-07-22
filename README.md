@@ -49,17 +49,3 @@ This class file is really custom tailored to my own benchmark goal but can be mo
 
 The batch file automatically places result files in results/abstraction-layer/.
 Make sure you add in a new folder for the new abstraction layer here.
-
-Aggregating the results
----------------
-After a while a lot of results will be generated.
-Aggregating these in spreadsheets by copy-paste is too time consuming.
-Use the benchmarker/Aggregator.java class
-
-1. Copy the results directory into benchmarker/results
-2. Run the Aggregator class, add in your abstraction-layer name here, and the workload names.
-3. The results will now be generated into the benchmarker/csv directory.
-4. A CSV file is created for each abstraction layer and workload.
-
-The CSV's can then be used to analyze the results.
-# YCSB-Extended-V2
