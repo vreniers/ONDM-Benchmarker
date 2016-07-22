@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yahoo.ycsb</groupId>
+        <artifactId>root</artifactId>
+        <version>0.9.0</version>
+    </parent>
+
+    <artifactId>datanucleus-binding</artifactId>
+    <packaging>jar</packaging>
+    <name>DataNucleus Binding</name>
+
+    <properties>
+        <checkstyle.failOnViolation>false</checkstyle.failOnViolation>
+        <jackson.api.version>1.9.4</jackson.api.version>
+        <encoding>UTF-8</encoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.yahoo.ycsb</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jpa</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+        <!-- ENABLE THIS FOR H2 -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongodb.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-mongodb</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+		
+		  <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.6.1</version>
+		  </dependency>
+		  <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.6.1</version>
+		  </dependency>
+		
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.datanucleus</groupId>
+                <artifactId>datanucleus-maven-plugin</artifactId>
+                <version>4.0.0-release</version>
+                <configuration>
+                    <api>JPA</api>
+                    <persistenceUnitName>MongoDB</persistenceUnitName>
+                    <log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
+                    <verbose>false</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

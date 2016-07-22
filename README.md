@@ -6,6 +6,7 @@ Extended by Vincent Reniers with support for NoSQL abstraction layers:
 - Hibernate OGM
 - Kundera
 - Apache Gora
+- DataNucleus
 
 This YCSB also provides an updated version for the MongoDB interface.
 Extra's added: A way to generate a batch file and aggregate YCSB result files

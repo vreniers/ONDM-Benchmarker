@@ -1,9 +1,6 @@
 package com.yahoo.ycsb.db;
 
 
-import generated.User;
-
-
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Vector;
@@ -14,11 +11,14 @@ import org.apache.gora.store.DataStore;
 import org.apache.gora.store.DataStoreFactory;
 import org.apache.gora.util.GoraException;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
 
 import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.Status;
+
+import generated.User;
 
 /**
  * Database interface layer for YCSB.
@@ -39,12 +39,26 @@ public class GoraClientCRU extends DB{
 	
 	private final int clearOps = 1000;	
 	
+	public static void main(String[] args) {
+		GoraClientCRU client = new GoraClientCRU();
+		try {
+			client.init();
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Initializes once.
 	 */
 	public void init() throws DBException {
 	    try {
-			dataStore = DataStoreFactory.getDataStore(String.class, User.class, new Configuration());
+	    	Configuration hConf = HBaseConfiguration.create(new Configuration());
+	    	hConf.set("hbase.zookeeper.quorum", "192.168.1.6");
+	    	hConf.set("hbase.zookeeper.property.clientPort", "2181");
+	    	
+			dataStore = DataStoreFactory.getDataStore(String.class, User.class, hConf );
 			
 			amountOps = 1;
 		} catch (GoraException e) {

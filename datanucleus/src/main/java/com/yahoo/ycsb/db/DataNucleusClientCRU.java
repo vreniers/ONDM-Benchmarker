@@ -2,6 +2,8 @@ package com.yahoo.ycsb.db;
 
 
 import java.util.HashMap;
+
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -10,12 +12,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 
-import com.impetus.client.mongodb.MongoDBClientProperties;
-import com.mongodb.WriteConcern;
+//import org.datanucleus.enhancer.DataNucleusEnhancer;
+
 import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
 import com.yahoo.ycsb.Status;
+
 
 /**
  * Database interface layer for the Kundera abstraction layer.
@@ -23,31 +26,34 @@ import com.yahoo.ycsb.Status;
  * 
  * @author vincent
  */
-public class KunderaClientCRU extends DB{
+public class DataNucleusClientCRU extends DB{
 	
 	private static final Status Ok = Status.OK;
 
     private static final Status Error = Status.ERROR;
     
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("kundera-hbase");
-    
-    //TODO: !!!!!!!!!!!!!!!! Fixed
-    private final int clearOps = 1000;
+    private static EntityManagerFactory emf;
     
     private int amountOps;
     
-    private boolean useTransaction = true;
+    private final int clearOps = 1000;
     
     private int closedThreads = 0;
     
 	/**
 	 * Initializes once.
 	 */
-	public void init() throws DBException {			
-        amountOps = 1;
+	public void init() throws DBException {
+		Map properties = new HashMap();
+		
+//		DataNucleusEnhancer enhancer = new DataNucleusEnhancer("JPA", null);
+//        enhancer.setVerbose(true);
+//        enhancer.addPersistenceUnit("MongoDB");
+//        enhancer.enhance();
+
         
-        if(getProperties().getProperty("useTransaction", "1").equals("0"))
-        	useTransaction = false;
+		emf = Persistence.createEntityManagerFactory("MongoDB" , properties);
+        amountOps = 1;
 	}
 	
 	/**
@@ -59,29 +65,15 @@ public class KunderaClientCRU extends DB{
     	if(++closedThreads == Integer.valueOf(getProperties().getProperty("threadcount", "1")))
     		emf.close();
     }
-    
-    /**
-     * Utility method for the creation of an EM with the
-     * correct write concern set.
-     * 
-     * @return
-     */
-    private EntityManager getEntityManager() {
-    	EntityManager em = emf.createEntityManager();
-    	
-    	em.setFlushMode(FlushModeType.COMMIT);
-    	em.setProperty(MongoDBClientProperties.WRITE_CONCERN, WriteConcern.ACKNOWLEDGED);
-    	
-    	return em;
-    }
 	
 	@Override
 	public Status read(String table, String key, Set<String> fields, HashMap<String, ByteIterator> result) {
 		try{
-			EntityManager em = emf.createEntityManager();
+			EntityManager em = getEntityManager();
 			
-			@SuppressWarnings("unused")
 			User u = em.find(User.class, key);
+			
+//			System.out.println(u);
 			
 			if(amountOps++ % clearOps == 0)
 				em.clear();
@@ -99,7 +91,6 @@ public class KunderaClientCRU extends DB{
 	public Status scan(String table, String startkey, int recordcount, Set<String> fields, Vector<HashMap<String, ByteIterator>> result) {
 		System.out.println("scan");
 		
-		// TODO: Omit result? Not important?
 		return Ok;
 	}
 
@@ -108,8 +99,7 @@ public class KunderaClientCRU extends DB{
 		try{
 			EntityManager em = getEntityManager();
 			
-			User user = new User();
-			user.setUserId(key);
+			User user = em.find(User.class, key);
 			
 			if(values.containsKey("field0") && values.get("field0") != null)
 				user.setField0(values.get("field0").toString());
@@ -141,11 +131,9 @@ public class KunderaClientCRU extends DB{
 			if(values.containsKey("field9") && values.get("field9") != null)
 				user.setField9(values.get("field9").toString());
 			
-			beginTransaction(em);
-			
+			em.getTransaction().begin();
 			em.merge(user);
-			
-			commitTransaction(em);
+			em.getTransaction().commit();
 			
 			if(amountOps++ % clearOps == 0)
 				em.clear();
@@ -164,8 +152,7 @@ public class KunderaClientCRU extends DB{
 	public Status insert(String table, String key, HashMap<String, ByteIterator> values) {
 		try{
 			EntityManager em = getEntityManager();
-			
-			beginTransaction(em);
+			em.getTransaction().begin();
 			
 			User user =  new User(key,
 					values.get("field0").toString(), values.get("field1").toString(), values.get("field2").toString(), 
@@ -175,12 +162,12 @@ public class KunderaClientCRU extends DB{
 			
 	        em.persist(user);
 	        
-	        commitTransaction(em);
+	        em.getTransaction().commit();
 	        
 	        if(amountOps++ % clearOps == 0)
 				em.clear();
 	        
-	        em.close();
+	        em.close();			
 		} catch (Exception e){
 			e.printStackTrace();
 			return Error;
@@ -190,23 +177,15 @@ public class KunderaClientCRU extends DB{
 	}
 
 	/**
-	 * If transaction is used we commit the operations.
+	 * Utility method for the creation of an EM.
 	 * 
-	 * @param em
+	 * @return
 	 */
-	private void commitTransaction(EntityManager em) {
-		if(useTransaction)
-			em.getTransaction().commit();
-	}
-
-	/**
-	 * If transaction is used we begin the transaction.
-	 * 
-	 * @param em
-	 */
-	private void beginTransaction(EntityManager em) {
-		if(useTransaction)
-			em.getTransaction().begin();
+	private EntityManager getEntityManager() {
+		EntityManager em = emf.createEntityManager();
+		em.setFlushMode(FlushModeType.COMMIT);
+		
+		return em;
 	}
 
 	@Override
@@ -218,9 +197,7 @@ public class KunderaClientCRU extends DB{
 			em.remove(em.find(User.class, key));
 			em.getTransaction().commit();
 			
-			if(amountOps++ % clearOps == 0)
-				em.clear();
-			
+			em.clear();
 	        em.close();
 		} catch (Exception e) {
 			e.printStackTrace();	

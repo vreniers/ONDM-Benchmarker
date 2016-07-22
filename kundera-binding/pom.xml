@@ -41,7 +41,12 @@
 	      <artifactId>mongo-java-driver</artifactId>
 	      <version>${mongodb.version}</version>
 	    </dependency>
-	    
+	 
+	 <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-client</artifactId>
+      <version>${hbase098.version}</version>
+    </dependency>
 	    <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-nop</artifactId>
@@ -55,6 +60,7 @@
             <version>2.15</version>
             <scope>test</scope>
         </dependency>
+        
 		<dependency>
 			<groupId>com.impetus.kundera.core</groupId>
 			<artifactId>kundera-core</artifactId>
@@ -65,6 +71,13 @@
 			<artifactId>kundera-mongo</artifactId>
 			<version>2.15</version>
 		</dependency>
+		
+		<dependency>
+		     <groupId>com.impetus.kundera.client</groupId>
+		     <artifactId>kundera-hbase</artifactId>
+		     <version>2.15</version>
+		</dependency>
+				
 		<dependency>
 			<groupId>com.yahoo.ycsb</groupId>
 			<artifactId>core</artifactId>

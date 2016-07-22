@@ -1,5 +1,7 @@
+*.idea/
+*.iml
 *DS_Store
-pom.xml
+
 
 /results/*
 

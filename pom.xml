@@ -43,11 +43,11 @@
     Nail down slf4j version to 1.6 so that it defaults to no-op logger.
     http://www.slf4j.org/codes.html#StaticLoggerBinder
     -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.6.4</version>
-    </dependency>
+<!--     <dependency> -->
+<!--       <groupId>org.slf4j</groupId> -->
+<!--       <artifactId>slf4j-api</artifactId> -->
+<!--       <version>1.6.4</version> -->
+<!--     </dependency> -->
     
     <dependency>
   <groupId>junit</groupId>
@@ -62,7 +62,7 @@
   <!-- Properties Management -->
   <properties>
     <maven.assembly.version>2.2.1</maven.assembly.version>
-    <hbase.version>0.92.1</hbase.version>
+     <hbase098.version>0.98.14-hadoop2</hbase098.version>
     <accumulo.version>1.6.0</accumulo.version>
     <cassandra.version>0.7.0</cassandra.version>
     <infinispan.version>7.1.0.CR1</infinispan.version>
@@ -86,7 +86,9 @@
     <module>kundera-binding</module>
     <!--<module>gemfire</module>-->
     <module>mongodb</module>
+    <module>datanucleus</module>
     <!--module>nosqldb</module-->
+    <module>hbase098</module>
     <module>distribution</module>
   </modules>
 

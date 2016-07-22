@@ -20,4 +20,22 @@
 			<property name="kundera.client.property" value="kunderaMongoTest.xml" />
 		</properties>
 	</persistence-unit>    
+	
+	
+	<persistence-unit name="kundera-hbase">
+		<provider>com.impetus.kundera.KunderaPersistence</provider>
+		<properties>
+			<property name="kundera.nodes" value="192.168.1.6" />
+			<property name="kundera.port" value="60000" />
+			<property name="kundera.keyspace" value="kundera" />
+			<property name="kundera.dialect" value="hbase" />
+			<property name="kundera.client.lookup.class" value="com.impetus.client.hbase.HBaseClientFactory" />
+
+			<!-- <property name="index.home.dir" value="./lucene" /> -->
+			<property name="kundera.ddl.auto.prepare" value="update" />
+			<property name="kundera.pool.size.max.active" value="1" />
+			<property name="kundera.pool.size.max.total" value="1" />
+			<property name="kundera.client.property" value="kunderaTest.xml" />
+		</properties>
+	</persistence-unit> 
 </persistence>

@@ -11,11 +11,19 @@ public class BenchmarkerCRU {
 
 	private final static String SLEEP_CMD = "sleep";
 	
+<<<<<<< HEAD
 	private final static int MAX_INSERTION = 1000000 * 20;
 	//private final static int MAX_INSERTION = 10000 * 1;
 	private final static int MAX_OPS = 100000 * 10;
 	
 	private final static int INIT_OPS = 153125 * 10;
+=======
+	private final static int MAX_INSERTION = 100000 * 200;
+	//private final static int MAX_INSERTION = 10000 * 1;
+	private final static int MAX_OPS = 100000 * 10;
+	
+	private final static int INIT_OPS = 1000000;
+>>>>>>> HBaseBench
 	private final static int INIT_RECORDS = 153125;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
@@ -51,12 +59,14 @@ public class BenchmarkerCRU {
 	public BenchmarkerCRU() {
 		databaseLayers = new ArrayList<String>();
 		databaseLayers.add("mongodb");
-		databaseLayers.add("hibernate");
+//		databaseLayers.add("hibernate");
 //		databaseLayers.add("playorm");
-		databaseLayers.add("eclipselink");
+//		databaseLayers.add("eclipselink");
 		
-		databaseLayers.add("gora");
-		databaseLayers.add("kundera");
+//		databaseLayers.add("gora");
+//		databaseLayers.add("kundera");
+		
+		databaseLayers.add("datanucleus");
 		
 //		
 		start();
@@ -82,7 +92,11 @@ public class BenchmarkerCRU {
 //			startInsertionTests(layer);
 //			startInsertionTests(layer);
 				
+<<<<<<< HEAD
 			startReadUpdate(layer);
+=======
+//			startReadUpdate(layer);
+>>>>>>> HBaseBench
 //			startReadUpdate(layer);
 //			startReadUpdate(layer);
 //			startReadUpdate(layer);
@@ -251,7 +265,8 @@ public class BenchmarkerCRU {
 	private boolean isValid(String layer) {
 		return layer == "kundera" || layer == "eclipselink" || layer == "playorm" 
 				|| layer == "mongodb" || layer == "gora" || layer == "hibernate" || layer =="mongodb-cru"
-				|| layer=="kundera-cru" || layer == "eclipselink-cru" || layer == "hibernate-cru" || layer == "gora-cru";
+				|| layer=="kundera-cru" || layer == "eclipselink-cru" || layer == "hibernate-cru" || layer == "gora-cru" 
+				|| layer == "datanucleus" || layer == "datanucleus-cru";
 	}
 
 	/**

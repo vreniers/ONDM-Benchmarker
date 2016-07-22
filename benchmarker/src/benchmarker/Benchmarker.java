@@ -11,10 +11,10 @@ public class Benchmarker {
 	
 	private final static String SLEEP_CMD = "sleep";
 	
-	private final static int MAX_INSERTION = 1000000 * 10;
-	private final static int MAX_OPS = 10000;
+	private final static int MAX_INSERTION = 100000 * 10;
+	private final static int MAX_OPS = 200000;
 	
-	private final static int INIT_OPS = 10000;
+	private final static int INIT_OPS = 200000;
 	private final static int INIT_RECORDS = 50000;
 	
 	private final static float INSERTION_INCREMENT = (float) 1.75;
@@ -53,16 +53,18 @@ public class Benchmarker {
 	 */
 	public Benchmarker() {
 		databaseLayers = new ArrayList<String>();
-		databaseLayers.add("hibernate");
+//		databaseLayers.add("hibernate");
 //		databaseLayers.add("playorm");
-		databaseLayers.add("eclipselink");
-		databaseLayers.add("mongodb");
+//		databaseLayers.add("eclipselink");
+//		databaseLayers.add("mongodb");
 //		databaseLayers.add("gora");
-		databaseLayers.add("kundera");
+//		databaseLayers.add("kundera");
+		
+		databaseLayers.add("datanucleus");
 		
 		queryCmds = new ArrayList<String>();
-		queryCmds.add("0");
-		queryCmds.add("SELECT-PRIMARY");
+//		queryCmds.add("0");
+//		queryCmds.add("SELECT-PRIMARY");
 		queryCmds.add("EMAIL");
 		queryCmds.add("AND");
 		queryCmds.add("BETWEEN");
@@ -80,18 +82,24 @@ public class Benchmarker {
 			
 			// Clear space
 //			dropDatabase(layer);
-		
-			startReadTests(layer);
-			startReadTests(layer);
-			startReadTests(layer);
-			startReadTests(layer);
+			
+			timeout();
+			
+			String properties="-p readType=0";
+			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 100000 * 10, properties);
+			
+			properties="-p readType=SELECT-PRIMARY";
+			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 100000 * 10, properties);
 			
 			
-			String properties="-p readType=OR";
+			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
+//			startReadTests(layer);
 			
-			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 1000, properties);
-			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 1000, properties);
-			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 1000, properties);
+			
+			properties="-p readType=OR";
+			runBenchmark(layer, false, 1, "read-workload", MAX_INSERTION, 30000, properties);
 			
 //			startReadTests(layer);
 			// Transaction phase
@@ -99,7 +107,7 @@ public class Benchmarker {
 //			startReadModify(layer);
 			
 			// Clear space
-			dropDatabase(layer);
+//			dropDatabase(layer);
 		}
 	}
 	
@@ -267,7 +275,7 @@ public class Benchmarker {
 	 */
 	private boolean isValid(String layer) {
 		return layer == "kundera" || layer == "eclipselink" || layer == "playorm" 
-				|| layer == "mongodb" || layer == "gora" || layer == "hibernate";
+				|| layer == "mongodb" || layer == "gora" || layer == "hibernate" || layer == "datanucleus";
 	}
 
 	/**
